@@ -1,0 +1,14 @@
+sqs:
+  queue: DEV_IFOOD_CATALOG_PRODUCT_VIOLATION,DEV_IFOOD_CATALOG_CATEGORY_VIOLATION,DEV_IFOOD_CATALOG_IMAGE_VIOLATION
+server:
+  port: 9000
+
+cloud:
+  aws:
+    sqs:
+      endpoint: http://localhost:4566/000000000000/DEV_IFOOD_CATALOG_PRODUCT_VIOLATION
+      handler:
+        default-deletion-policy: never
+      listener:
+        visibility-timeout: 10
+      enabled: true
