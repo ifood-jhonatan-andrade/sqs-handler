@@ -8,7 +8,7 @@ import software.amazon.awssdk.services.sqs.model.ListQueuesRequest
 import software.amazon.awssdk.services.sqs.model.SendMessageRequest
 import java.time.Instant
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.UUID
 
 
 @Component

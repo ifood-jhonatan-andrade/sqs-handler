@@ -4,13 +4,11 @@ import com.example.sqshandler.model.QueueContext
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Profile
 import software.amazon.awssdk.services.sqs.SqsClient
 import software.amazon.awssdk.services.sqs.model.CreateQueueRequest
 
 
 @Configuration
-@Profile("local")
 class AutoCreateSqsConfiguration {
 
     @Bean

@@ -1,5 +1,6 @@
 package com.example.sqshandler.configuration
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
@@ -11,11 +12,10 @@ import java.net.URI
 
 @Configuration
 class SqsClientConfiguration {
-    @Profile("local")
     @Bean
-    fun sqsQueue(): SqsClient? {
+    fun sqsQueue(@Value("\${aws.endpoint-client}") endpointClient: String): SqsClient? {
         return SqsClient.builder()
-            .endpointOverride(URI.create("http://localhost:4566"))
+            .endpointOverride(URI.create(endpointClient))
             .region(Region.US_EAST_1)
             .credentialsProvider(StaticCredentialsProvider.create(object: AwsCredentials {
                 override fun accessKeyId(): String {

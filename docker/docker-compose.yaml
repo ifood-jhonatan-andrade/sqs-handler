@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  aws:
+    image: localstack/localstack:0.11.3
+    environment:
+      - SERVICES=sqs
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+    ports:
+      - "4566:4566" #sqs
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+
+  app:
+    image: sqs-handler:latest
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    environment:
+      - AUTO_CREATE_QUEUES=DEV_IFOOD_CATALOG_PRODUCT_VIOLATION,DEV_IFOOD_CATALOG_CATEGORY_VIOLATION,DEV_IFOOD_CATALOG_IMAGE_VIOLATION
+      - ENDPOINT_CLIENT=http://host.docker.internal:4566
+    ports:
+      - "9000:9000"
